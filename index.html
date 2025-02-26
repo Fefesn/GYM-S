@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GYM</title>
+    <!-- Link do Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="dark text-white text-center py-3">
+        <img src="img/icone-academia.png" alt="Ícone de Academia" class="img-fluid" style="width: 73px;">
+    </header>
+
+    <main>
+        <section id="exercise-log" class="flip-container">
+            <div class="flipper">
+                <div class="front">
+                    <h2>Diário de Exercícios</h2>
+                    <form id="exercise-form">
+                        <div class="form-group">
+                            <label for="exercicio">Exercício:</label>
+                            <select class="form-control" id="exercicio" name="exercicio" required>
+                                <option value="">Selecione o Exercício</option>
+                                <option value="PeckDeck">PeckDeck</option>
+                                <option value="Incline Bench Press">Incline Bench Press</option>
+                                <option value="PullDown">PullDown</option>
+                                <option value="Low Row">Low Row</option>
+                                <option value="Inverse PeckDeck">Inverse PeckDeck</option>
+                                <option value="Biceps Curl">Biceps Curl</option>
+                                <option value="Triceps Pulley">Tríceps Pulley</option>
+                                <option value="Triceps French">Triceps French</option>
+                                <option value="Leg Press">Leg Press 180º</option>
+                                <option value="Leg Extension">Leg Extension</option>
+                                <option value="Leg Flexion">Leg Flexion</option>
+                                <option value="Calf Machine">Calf Machine</option>
+                            </select>
+                        </div>
+                        <input type="number" id="exercise-reps" paceholder="Repetiçoes" required>
+                        <input type="number" id="exercise-sets" placeholder="Series" required>
+                        <input type="number" id="exercise-weight" placeholder="Peso (kg)" required>
+                        <button type="submit">Adicionar</button>
+                    </form>
+                    <ul id="exercise-list"></ul>
+                    <button id="toggle-view" class="toggle-button">
+                    <img src="img/icon2.png" alt="Flip Icon" style="width:22px; height: 22x;">
+                    </button>
+                </div>
+                <div class="back">
+                    <h2>Contador de Dias</h2>
+                    <ul class="days-list">
+                        <li>Segunda Feira <input type="checkbox"></li>
+                        <li>Terça Feira <input type="checkbox"></li>
+                        <li>Quarta Feira <input type="checkbox"></li>
+                        <li>Quinta Feira <input type="checkbox"></li>
+                        <li>Sexta Feira <input type="checkbox"></li>
+                        <li>Cardio <input type="checkbox"></li>
+                    </ul>
+                    <button id="toggle-back" class="toggle-button">Voltar</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
