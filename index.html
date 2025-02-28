@@ -8,17 +8,18 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="dark text-white text-center py-3">
-        <img src="img/icone-academia.png" alt="Ícone de Academia" class="img-fluid" style="width: 73px;">
+        <img src="img/icone-academia.png" alt="Logo Academia" class="logo-academia" style="height: 73px; width: 73px;">
     </header>
 
     <main>
         <section id="exercise-log" class="flip-container">
             <div class="flipper">
                 <div class="front">
-                    <h2>Diário de Exercícios</h2>
+                    <h2>Exercícios</h2>
                     <form id="exercise-form">
                         <div class="form-group">
                             <label for="exercicio">Exercício:</label>
@@ -38,7 +39,7 @@
                                 <option value="Calf Machine">Calf Machine</option>
                             </select>
                         </div>
-                        <input type="number" id="exercise-reps" paceholder="Repetiçoes" required>
+                        <input type="number" id="exercise-reps" placeholder="Repetições" required>
                         <input type="number" id="exercise-sets" placeholder="Series" required>
                         <input type="number" id="exercise-weight" placeholder="Peso (kg)" required>
                         <button type="submit">Adicionar</button>
