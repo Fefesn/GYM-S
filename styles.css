@@ -1,10 +1,12 @@
 body {
     background-color: #3C3C3C; /* Fundo claro */
     color: #333; /* Texto escuro */
-    font-family: 'lato', sans-serif;
+    font-family: 'Inter', 'Lato', sans-serif; /* Fonte mais moderna */
     margin: 0;
     padding: 0;
     line-height: 1.6; /* Melhor espaçamento entre linhas */
+    letter-spacing: 0.3px; /* Melhor espaçamento entre letras */
+    font-size: 16px;
 }
 
 header {
@@ -24,6 +26,15 @@ h1, h2 {
     margin: 20px 0;
     color: #ffffff; /* Azul moderno */
     font-weight: 700; /* Peso mais forte para destaque */
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    transition: transform 0.3s ease;
+}
+
+h1:hover, h2:hover {
+    transform: translateX(10px);
+    color: #ffa500;
 }
 
 h1 {
@@ -49,6 +60,23 @@ section {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 500px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+section::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #ffa500;
+    transition: width 0.3s ease;
+}
+
+section:hover::after {
+    width: 100%;
 }
 
 button {
@@ -59,8 +87,32 @@ button {
     cursor: pointer;
     transition: background-color 0.3s;
     border-radius: 5px;
-    font-weight: bold;
-    font-size: 1em; /* Tamanho de fonte consistente */
+    font-weight: 600;
+    font-size: 0.9em;
+    position: relative;
+    overflow: hidden;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255, 165, 0, 0.4),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
 }
 
 button:hover {
@@ -69,7 +121,7 @@ button:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-#workout-list li {
+#workout-list li, #exercise-list li {
     background-color: #444;
     color: #e0e0e0;
     margin-bottom: 10px;
@@ -78,6 +130,15 @@ button:hover {
     width: 100%;
     max-width: 400px;
     text-align: center;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    transition: all 0.3s ease;
+}
+
+#workout-list li:hover, #exercise-list li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #exercise-log {
@@ -101,15 +162,54 @@ button:hover {
 }
 
 #exercise-list li {
-    background-color: #e0e0e0;
-    color: #333;
-    margin-bottom: 10px;
-    padding: 12px; /* Mais espaçamento interno */
-    border-radius: 5px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    animation: slideIn 0.3s ease-out;
+    transform-origin: center;
+    position: relative;
+}
+
+#exercise-list li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.exercise-header {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.exercise-date {
+    font-size: 0.8em;
+    color: #666;
+}
+
+.exercise-name {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #ffa500;
+}
+
+.exercise-details {
+    display: flex;
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+    color: #444;
 }
 
 #exercise-list li.added {
@@ -126,14 +226,23 @@ button:hover {
 }
 
 input[type="text"], input[type="number"] {
-    background-color: #e0e0e0; /* Fundo cinza claro */
-    border: none;
+    background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #ddd;
     padding: 12px; /* Mais espaçamento interno */
     border-radius: 5px;
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 10px;
     font-size: 1em;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 165, 0, 0.2);
 }
 
 .flip-container {
@@ -211,11 +320,30 @@ input[type="text"], input[type="number"] {
     display: flex;
     align-items: center;
     justify-content: center;
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+}
+
+.days-list input[type="checkbox"]:hover {
+    transform: scale(1.1);
 }
 
 .days-list input[type="checkbox"]:checked {
     background-color: #3C3C3C;
     border-color: #333;
+    animation: checkmark 0.3s ease-in-out forwards;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 .days-list input[type="checkbox"]:checked::after {
@@ -230,9 +358,9 @@ input[type="text"], input[type="number"] {
 }
 
 select.form-control {
-    background-color: #e0e0e0;
-    color: #333;
-    border: 1px solid #495057;
+    background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #ddd;
     height: 50px;
     margin-bottom: -7px;
 }
@@ -254,4 +382,1106 @@ select.form-control option {
 .btn-add:hover {
     background-color: #218838;
     color: white;
+}
+
+/* Adicionar fonte personalizada */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700&display=swap');
+
+/* Adicionar animação de loading */
+@keyframes loading {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Adicionar feedback visual ao deletar exercício */
+#exercise-list li.removing {
+    animation: slideOut 0.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    20% {
+        transform: translateX(-20px) scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%) scale(0.5);
+    }
+}
+
+/* Melhorar contraste dos inputs */
+input[type="text"], input[type="number"], select.form-control {
+    background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #ddd;
+}
+
+/* Adicionar modo noturno automático */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #f5f5f5;
+    }
+}
+
+.exercise-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.exercise-date {
+    font-size: 0.8em;
+    color: #888;
+}
+
+.exercise-name {
+    font-weight: 600;
+    color: #ffa500;
+}
+
+.exercise-details {
+    font-size: 0.9em;
+}
+
+.exercise-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    transition: all 0.3s ease;
+    background-color: #3C3C3C;
+    color: #ffa500;
+    border: none;
+}
+
+.edit-btn:hover, .delete-btn:hover {
+    transform: scale(1.1);
+    background-color: #2E2E2E;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Adicionar gráfico de progresso */
+.progress-chart {
+    background: #444;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* Adicionar tooltip */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:hover::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: #333;
+    color: white;
+    border-radius: 4px;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.rest-timer {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.timer-display {
+    font-size: 2.5em;
+    font-family: 'Roboto Mono', monospace;
+    color: #ffa500;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+}
+
+.timer-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.timer-btn {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.timer-btn:hover {
+    background-color: #ffa500;
+    transform: translateY(-2px);
+}
+
+/* Adicionar animação pulsante para o timer */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.timer-display.active {
+    animation: pulse 1s infinite;
+}
+
+/* Adicionar gráfico de progresso com gradiente */
+.progress-chart {
+    background: linear-gradient(145deg, #444 0%, #333 100%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Melhorar visualização em dispositivos móveis */
+@media (max-width: 768px) {
+    .timer-controls {
+        flex-wrap: wrap;
+    }
+    
+    .timer-btn {
+        flex: 1;
+        min-width: 70px;
+    }
+}
+
+/* Estilos para notificações de recordes */
+.record-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #3C3C3C;
+    color: #ffa500;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translateX(120%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+.record-notification.show {
+    transform: translateX(0);
+}
+
+.record-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.record-icon {
+    font-size: 1.5em;
+}
+
+/* Estilos para o timer */
+.rest-timer {
+    background-color: #444;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.timer-display {
+    font-size: 2.5em;
+    font-family: 'Roboto Mono', monospace;
+    color: #ffa500;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
+}
+
+.timer-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.timer-btn {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex: 1;
+    min-width: 70px;
+}
+
+.timer-btn:hover {
+    background-color: #ffa500;
+    transform: translateY(-2px);
+}
+
+.timer-display.active {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Modal de edição */
+.edit-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px;
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.edit-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.save-btn, .cancel-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #3C3C3C;
+    color: #ffa500;
+}
+
+.save-btn:hover, .cancel-btn:hover {
+    background-color: #2E2E2E;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Animações suaves */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-content {
+    animation: slideIn 0.3s ease;
+}
+
+/* Estilo para o contador de séries */
+.sets-tracker {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.set-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid #ffa500;
+    background: transparent;
+    color: #ffa500;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.set-btn:hover {
+    transform: scale(1.1);
+    background: rgba(255, 165, 0, 0.1);
+}
+
+.set-btn.completed {
+    background: #ffa500;
+    color: #3C3C3C;
+    animation: completedPulse 0.3s ease;
+}
+
+@keyframes completedPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Melhorar visualização em dispositivos móveis */
+@media (max-width: 480px) {
+    .exercise-details {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .sets-tracker {
+        flex-wrap: wrap;
+    }
+
+    .set-btn {
+        width: 25px;
+        height: 25px;
+        font-size: 0.9em;
+    }
+}
+
+/* Adicionar tema escuro */
+@media (prefers-color-scheme: dark) {
+    .set-btn {
+        border-color: #ffa500;
+        color: #ffa500;
+    }
+
+    .set-btn.completed {
+        background: #ffa500;
+        color: #333;
+    }
+}
+
+/* Melhorar feedback visual */
+.exercise-info {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.exercise-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* Melhorar animações de adição e remoção */
+#exercise-list li {
+    animation: slideIn 0.3s ease-out;
+    transform-origin: center;
+    position: relative;
+}
+
+#exercise-list li.removing {
+    animation: slideOut 0.5s ease-out forwards;
+    pointer-events: none;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 1;
+        transform: translateX(0) scale(1);
+    }
+    20% {
+        transform: translateX(-20px) scale(1.02);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(100%) scale(0.5);
+    }
+}
+
+/* Melhorar feedback visual ao deletar */
+.delete-btn:active + .exercise-info {
+    transform: translateX(-10px);
+    transition: transform 0.2s ease;
+}
+
+/* Adicionar efeito de shake ao tentar deletar */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+#exercise-list li.shake {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Modal de confirmação */
+.confirm-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.confirm-modal.show {
+    opacity: 1;
+}
+
+.confirm-content {
+    background: #3C3C3C;
+    padding: 25px;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transform: scale(0.7);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-modal.show .confirm-content {
+    transform: scale(1);
+}
+
+.confirm-icon {
+    font-size: 3em;
+    color: #ffa500;
+    margin-bottom: 15px;
+    animation: pulseWarning 1s infinite;
+}
+
+.confirm-content h3 {
+    color: #ffa500;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+}
+
+.confirm-content p {
+    color: #fff;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.confirm-btn, .cancel-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    background: #3C3C3C;
+    color: #ffa500;
+    border: 2px solid #ffa500;
+}
+
+.confirm-btn:hover, .cancel-btn:hover {
+    background: #ffa500;
+    color: #3C3C3C;
+    transform: translateY(-2px);
+}
+
+@keyframes pulseWarning {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Melhorar responsividade */
+@media (max-width: 480px) {
+    .confirm-content {
+        width: 85%;
+        padding: 20px;
+    }
+
+    .confirm-icon {
+        font-size: 2.5em;
+    }
+
+    .confirm-content h3 {
+        font-size: 1.3em;
+    }
+
+    .confirm-content p {
+        font-size: 1em;
+    }
+}
+
+/* Barra de progresso */
+.progress-bar {
+    width: 100%;
+    height: 4px;
+    background: #2E2E2E;
+    border-radius: 2px;
+    margin: 10px 0;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: #ffa500;
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+/* Efeito de conclusão de série */
+.completion-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, #ffa50066 0%, transparent 70%);
+    border-radius: 50%;
+    animation: ripple 0.6s ease-out;
+    pointer-events: none;
+}
+
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(2);
+    }
+}
+
+/* Efeito de exercício completo */
+.exercise-completed {
+    position: relative;
+    overflow: hidden;
+}
+
+.confetti-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ffa500;
+    border-radius: 50%;
+    animation: confetti 1s ease-out forwards;
+    animation-delay: var(--delay);
+    transform: rotate(var(--rotation));
+}
+
+@keyframes confetti {
+    0% {
+        transform: translateY(0) rotate(var(--rotation));
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100px) rotate(calc(var(--rotation) + 720deg));
+        opacity: 0;
+    }
+}
+
+/* Melhorar aparência dos botões de série */
+.set-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.set-btn.completed {
+    animation: completedPulse 0.3s ease;
+}
+
+@keyframes completedPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .progress-bar {
+        height: 3px;
+    }
+    
+    .confetti-piece {
+        width: 6px;
+        height: 6px;
+    }
+}
+
+/* Efeito de brilho na barra de progresso */
+.progress-fill.glow {
+    filter: brightness(1.5);
+}
+
+/* Melhorar aparência dos exercícios */
+#exercise-list li {
+    background: linear-gradient(145deg, #3c3c3c 0%, #333333 100%);
+    border: 1px solid rgba(255, 165, 0, 0.1);
+    backdrop-filter: blur(5px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#exercise-list li:hover {
+    transform: translateY(-3px) scale(1.01);
+    border-color: rgba(255, 165, 0, 0.3);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Efeito de destaque ao completar série */
+.set-btn.completed {
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+}
+
+/* Animação de entrada melhorada */
+@keyframes slideInFade {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.added {
+    animation: slideInFade 0.5s ease-out forwards;
+}
+
+/* Estilo para série atual */
+.set-btn.current {
+    border: 2px solid #ffa500;
+    animation: pulse 1.5s infinite;
+}
+
+/* Tooltip personalizado */
+[data-tooltip] {
+    position: relative;
+}
+
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    padding: 5px 10px;
+    background: #3C3C3C;
+    color: #ffa500;
+    border-radius: 4px;
+    font-size: 0.8em;
+    opacity: 0;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    pointer-events: none;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+[data-tooltip]:hover:before {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+}
+
+/* Efeito de onda ao clicar */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 165, 0, 0.4);
+    transform: scale(0);
+    animation: rippleEffect 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes rippleEffect {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Estilos para gestos de toque */
+.swipe-right {
+    animation: swipeRight 0.3s ease-out;
+}
+
+@keyframes swipeRight {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(50px); }
+    100% { transform: translateX(0); }
+}
+
+/* Indicador de arraste */
+#exercise-list li:after {
+    content: '⟪ deslize para excluir';
+    position: absolute;
+    right: -100%;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffa500;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#exercise-list li:active:after {
+    opacity: 0.5;
+}
+
+/* Estilo do indicador de dias */
+.day-indicator {
+    background: linear-gradient(145deg, #3c3c3c 0%, #333333 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 165, 0, 0.1);
+}
+
+.day-status {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.day-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #ffa500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+    color: #ffa500;
+    transition: all 0.3s ease;
+}
+
+.day-status.completed .day-icon {
+    background: #ffa500;
+    color: #3C3C3C;
+}
+
+.day-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.day-label {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+.day-exercises {
+    font-size: 0.9em;
+    color: #bbb;
+}
+
+.streak-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.streak-count {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.streak-number {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffa500;
+}
+
+.streak-label {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.streak-flame {
+    font-size: 1.8em;
+    animation: flameFlicker 1.5s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+}
+
+@keyframes flameFlicker {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+.pulse-animation {
+    animation: statusPulse 2s ease-in-out;
+}
+
+@keyframes statusPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+    100% { transform: scale(1); }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .day-indicator {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .streak-info {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .streak-count {
+        align-items: center;
+    }
+
+    .day-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+}
+
+/* Efeito hover */
+.day-indicator:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 165, 0, 0.2);
+}
+
+/* Animação para novos recordes de streak */
+.new-streak-record {
+    animation: newRecord 0.6s ease-in-out;
+}
+
+@keyframes newRecord {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Ajuste na animação do status */
+.day-status.completed {
+    animation: none; /* Resetar animação existente */
+}
+
+.day-status.completed.pulse-animation {
+    animation: statusPulse 2s ease-in-out;
+}
+
+/* Garantir que a chama sempre seja visível */
+.streak-flame {
+    position: relative;
+    z-index: 1;
+}
+
+/* Melhorar visibilidade do texto */
+.day-exercises {
+    font-size: 0.9em;
+    color: #bbb; /* Cor mais clara para melhor legibilidade */
+}
+
+/* Ajuste na responsividade */
+@media (max-width: 480px) {
+    .day-indicator {
+        padding: 15px;
+    }
+    
+    .day-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+}
+
+/* Animação do ícone da academia */
+.logo-academia {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+}
+
+.logo-academia:hover {
+    animation: shake 0.5s ease-in-out;
+    filter: drop-shadow(0 6px 8px rgba(255, 165, 0, 0.4));
+}
+
+/* Animação de flutuação suave */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Animação de shake ao hover */
+@keyframes shake {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-10deg);
+    }
+    75% {
+        transform: rotate(10deg);
+    }
+}
+
+/* Efeito de clique */
+.logo-academia:active {
+    transform: scale(0.9);
+}
+
+/* Adicionar brilho laranja */
+.logo-academia {
+    filter: drop-shadow(0 0 5px rgba(255, 165, 0, 0.5));
+}
+
+/* Efeito de pulso ocasional */
+.logo-academia.pulse {
+    animation: logoPulse 0.5s ease-in-out;
+}
+
+@keyframes logoPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Estilo da marca d'água */
+.watermark {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-size: 0.8em;
+    opacity: 0.7;
+    z-index: 1000;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.watermark-text {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.watermark-name {
+    color: #ffa500;
+    font-weight: 500;
+    font-size: 1em;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Animação sutil */
+@keyframes fadeInWatermark {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 0.7;
+        transform: translateY(0);
+    }
+}
+
+.watermark {
+    animation: fadeInWatermark 1s ease-out;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .watermark {
+        font-size: 0.7em;
+        bottom: 5px;
+        right: 5px;
+    }
 }
